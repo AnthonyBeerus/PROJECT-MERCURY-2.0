@@ -7,6 +7,6 @@ ThemeData darkMode = ThemeData(
     //primary: Color(0xFFDF5657),
     secondary: Color(0xFF2d2c2c),
     tertiary: Color(0xFF464645),
-    inversePrimary: Color(0xFFF8FAF8),
+    onBackground: Color(0xFFF8FAF8),
   ),
 );
