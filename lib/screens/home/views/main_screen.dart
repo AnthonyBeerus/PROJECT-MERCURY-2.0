@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:mercury_2/data/data.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -43,28 +44,21 @@ class MainScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Hello!',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
+                          style: Theme.of(context).textTheme.displaySmall,
                         ),
                         Text(
                           'Anthony Morima',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onBackground,
-                          ),
+                          style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ],
                     ),
                   ],
                 ),
-              IconButton(
-                    onPressed: () {},
-                    icon: const Icon(CupertinoIcons.ellipsis),
-                    color: Theme.of(context).colorScheme.onBackground),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(CupertinoIcons.ellipsis),
+                  color: Theme.of(context).colorScheme.onBackground
+                ),
               ],
             ),
             const SizedBox(height: 20),
@@ -72,8 +66,27 @@ class MainScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.width / 2,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
+                
                 borderRadius: BorderRadius.circular(20),
+                gradient: Gradient.lerp(
+                  LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.inversePrimary,
+                    ],
+                  ),
+                  LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.inversePrimary,
+                    ],
+                  ),
+                  0.5,
+                ),
               ),
               child:  Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +123,7 @@ class MainScreen extends StatelessWidget {
                               width: 30,
                               height: 30,
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
@@ -150,7 +163,7 @@ class MainScreen extends StatelessWidget {
                               width: 30,
                               height: 30,
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
@@ -223,7 +236,7 @@ class MainScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: transactionData.length,
                 itemBuilder: (context, int i) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
@@ -233,16 +246,18 @@ class MainScreen extends StatelessWidget {
                         children: [
                           SlidableAction(
                             onPressed: (context) {},
+                            borderRadius: BorderRadius.circular(10),
                             label: 'Delete',
                             icon: CupertinoIcons.trash,
-                            backgroundColor: Colors.redAccent,
+                            backgroundColor: Theme.of(context).colorScheme.error,
                             foregroundColor: Theme.of(context).colorScheme.onBackground,
                           ),
                           SlidableAction(
                             onPressed: (context) {},
+                            borderRadius: BorderRadius.circular(10),
                             label: 'Edit',
                             icon: CupertinoIcons.pencil,
-                            backgroundColor: Colors.greenAccent,
+                            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                             foregroundColor: Theme.of(context).colorScheme.onBackground,
                           ),
                         ],
@@ -258,6 +273,7 @@ class MainScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Stack(
                                     alignment: Alignment.center,
@@ -266,23 +282,16 @@ class MainScreen extends StatelessWidget {
                                         width: 50,
                                         height: 50,
                                         decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                          color: transactionData[i]['color'],
                                           borderRadius: BorderRadius.circular(30),
                                         ),
                                       ),
-                                      Icon(
-                                        CupertinoIcons.bolt_fill,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onBackground, 
-                                      ),
+                                      transactionData[i]['icon'],
                                     ],
                                   ),
                                   const SizedBox(width: 12),
                                   Text(
-                                    'Electricity Bill',
+                                    transactionData[i]['name'],
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -292,9 +301,10 @@ class MainScreen extends StatelessWidget {
                                 ],
                               ),
                               Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    '\$ 100.00',
+                                    transactionData[i]['totalAmount'],
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -304,7 +314,7 @@ class MainScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Today',
+                                    transactionData[i]['date'],
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -315,11 +325,9 @@ class MainScreen extends StatelessWidget {
                                   ),
                                 ],
                               )
-                            
                             ],
                           ),
                         ),
-                        
                       ),
                     ),
                   );
