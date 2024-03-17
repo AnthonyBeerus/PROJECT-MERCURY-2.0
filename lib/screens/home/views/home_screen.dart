@@ -1,28 +1,50 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mercury_2/screens/home/views/main_screen.dart';
+import 'package:mercury_2/screens/stats/stats.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  int index = 0;
+  late Color selectedItem = Theme.of(context).colorScheme.primary;
+  late Color unselectedItem = Theme.of(context).colorScheme.onBackground;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          setState(() {
+            index = value;
+          });
+        },
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.background,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedIconTheme: IconThemeData(
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        items: const <BottomNavigationBarItem>[
+        
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.money_dollar),
+            icon: Icon(CupertinoIcons.money_dollar,
+              color: index == 0
+                ? selectedItem
+                : Theme.of(context).colorScheme.onBackground,
+            ),
             label: 'Expense',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.creditcard),
+            icon: Icon(CupertinoIcons.creditcard,
+              color: index == 1
+                ? selectedItem
+                : Theme.of(context).colorScheme.onBackground,
+            ),
             label: 'Transactions',
           ),
         ],
@@ -33,10 +55,13 @@ class HomeScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(CupertinoIcons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: const MainScreen(),
+      body: index == 0
+          ? const MainScreen()
+          : const StatsScreen(),
     );
   }
 }
