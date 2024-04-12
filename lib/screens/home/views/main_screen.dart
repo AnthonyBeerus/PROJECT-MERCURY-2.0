@@ -65,28 +65,9 @@ class MainScreen extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.width / 2,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                
+              decoration: BoxDecoration(  
                 borderRadius: BorderRadius.circular(20),
-                gradient: Gradient.lerp(
-                  LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Theme.of(context).colorScheme.primary,
-                      Theme.of(context).colorScheme.inversePrimary,
-                    ],
-                  ),
-                  LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Theme.of(context).colorScheme.primary,
-                      Theme.of(context).colorScheme.inversePrimary,
-                    ],
-                  ),
-                  0.5,
-                ),
+                color: Theme.of(context).colorScheme.primary,
               ),
               child:  Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +104,7 @@ class MainScreen extends StatelessWidget {
                               width: 30,
                               height: 30,
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                color: Theme.of(context).colorScheme.primary,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
@@ -163,7 +144,7 @@ class MainScreen extends StatelessWidget {
                               width: 30,
                               height: 30,
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.1),
+                                color: Theme.of(context).colorScheme.primary,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
