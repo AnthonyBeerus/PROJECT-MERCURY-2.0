@@ -11,6 +11,12 @@ class AddExpense extends StatefulWidget {
 }
 
 class _AddExpenseState extends State<AddExpense> {
+
+  TextEditingController expenseController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,6 +39,7 @@ class _AddExpenseState extends State<AddExpense> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: TextFormField(
+                  controller: expenseController,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: Theme.of(context).colorScheme.secondary,
@@ -47,6 +54,7 @@ class _AddExpenseState extends State<AddExpense> {
               ),
               const SizedBox(height: 64),
               TextFormField(
+                controller: categoryController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Theme.of(context).colorScheme.secondary,
@@ -63,6 +71,7 @@ class _AddExpenseState extends State<AddExpense> {
               ),
               const SizedBox(height: 16),
               TextFormField(
+                controller: dateController,
                 readOnly: true,
                 onTap: () {
                   showDatePicker(
