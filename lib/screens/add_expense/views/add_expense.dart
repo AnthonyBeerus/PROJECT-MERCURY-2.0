@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -182,7 +183,9 @@ class _AddExpenseState extends State<AddExpense> {
                                                       return GestureDetector(
                                                         onTap: () {
                                                           setState(() {
-                                                            iconSelected =myCategoryIcons[i];
+                                                            iconSelected =
+                                                                myCategoryIcons[
+                                                                    i];
                                                           });
                                                         },
                                                         child: Container(
@@ -222,6 +225,65 @@ class _AddExpenseState extends State<AddExpense> {
                                           : Container(),
                                       const SizedBox(height: 16),
                                       TextFormField(
+                                        readOnly: true,
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (ctx2) {
+                                              return AlertDialog(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .colorScheme
+                                                        .background,
+                                                elevation: 0,
+                                                content: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    ColorPicker(
+                                                        pickerColor:
+                                                            Theme.of(context)
+                                                                .colorScheme
+                                                                .background,
+                                                        onColorChanged:
+                                                            (value) {}),
+                                                    SizedBox(
+                                                      width: double.infinity,
+                                                      child: TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(ctx2);
+                                                        },
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          backgroundColor:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12.0),
+                                                            side:
+                                                                BorderSide.none,
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          'save',
+                                                          style:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .labelSmall,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
                                         decoration: InputDecoration(
                                           isDense: true,
                                           filled: true,
