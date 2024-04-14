@@ -121,12 +121,14 @@ class _AddExpenseState extends State<AddExpense> {
                                           fillColor: Theme.of(context)
                                               .colorScheme
                                               .secondary,
-                                          border: const OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.vertical(
-                                                top: Radius.circular(12),
-                                              ),
-                                              borderSide: BorderSide.none),
+                                          border: OutlineInputBorder(
+                                            borderRadius: isExpanded
+                                            ? const BorderRadius.vertical(
+                                              top: Radius.circular(12)
+                                              )
+                                            : BorderRadius.circular(12),
+                                            borderSide: BorderSide.none
+                                          ),
                                           suffixIcon:const Icon(
                                               FontAwesomeIcons.chevronDown,
                                               size: 16)),
