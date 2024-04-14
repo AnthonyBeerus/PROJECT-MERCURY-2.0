@@ -91,107 +91,114 @@ class _AddExpenseState extends State<AddExpense> {
                                 backgroundColor:
                                     Theme.of(context).colorScheme.background,
                                 elevation: 0,
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'Add Category',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    ),
-                                    const SizedBox(height: 16),
-                                    TextFormField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Category Name',
-                                        isDense: true,
-                                        filled: true,
-                                        fillColor: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            borderSide: BorderSide.none),
+                                content: SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'Add Category',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displaySmall,
                                       ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    //* Select Icon
-                                    TextFormField(
-                                      onTap: () {
-                                        setState(() {
-                                          isExpanded = !isExpanded;
-                                        });
-                                      },
-                                      readOnly: true,
-                                      decoration: InputDecoration(
-                                          hintText: 'Select Icon',
+                                      const SizedBox(height: 16),
+                                      TextFormField(
+                                        decoration: InputDecoration(
+                                          hintText: 'Category Name',
                                           isDense: true,
                                           filled: true,
                                           fillColor: Theme.of(context)
                                               .colorScheme
                                               .secondary,
                                           border: OutlineInputBorder(
-                                              borderRadius: isExpanded
-                                                  ? const BorderRadius.vertical(
-                                                      top: Radius.circular(12))
-                                                  : BorderRadius.circular(12),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                               borderSide: BorderSide.none),
-                                          suffixIcon: const Icon(
-                                              FontAwesomeIcons.chevronDown,
-                                              size: 16)),
-                                    ),
-                                    isExpanded
-                                    ? AnimatedContainer(
-                                        duration: const Duration(milliseconds: 5000),
-                                        curve: Curves.bounceIn,
-                                        width: MediaQuery.of(context).size.width,
-                                        height: 200,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              const BorderRadius.vertical(
-                                            bottom: Radius.circular(12),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      //* Select Icon
+                                      TextFormField(
+                                        onTap: () {
+                                          setState(() {
+                                            isExpanded = !isExpanded;
+                                          });
+                                        },
+                                        readOnly: true,
+                                        decoration: InputDecoration(
+                                            hintText: 'Select Icon',
+                                            isDense: true,
+                                            filled: true,
+                                            fillColor: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                            border: OutlineInputBorder(
+                                                borderRadius: isExpanded
+                                                    ? const BorderRadius.vertical(
+                                                        top: Radius.circular(12))
+                                                    : BorderRadius.circular(12),
+                                                borderSide: BorderSide.none),
+                                            suffixIcon: const Icon(
+                                                FontAwesomeIcons.chevronDown,
+                                                size: 16)),
+                                      ),
+                                      isExpanded
+                                      ? AnimatedContainer(
+                                          duration: const Duration(milliseconds: 5000),
+                                          curve: Curves.bounceIn,
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 200,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.vertical(
+                                              bottom: Radius.circular(12),
+                                            ),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
                                           ),
-                                          color: Theme.of(context)
+                                          child: GridView.builder(
+                                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3,
+                                                mainAxisSpacing: 5,
+                                                crossAxisSpacing: 5
+                                              ),
+                                              itemCount: myCategoryIcons.length,
+                                              itemBuilder: (context, int i) {
+                                                return Container(
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(),
+                                                    borderRadius: BorderRadius.circular(12),
+                                                    image: DecorationImage(
+                                                      image: AssetImage(
+                                                        'assets/${myCategoryIcons[i]}.png',
+                                                      )
+                                                    )
+                                                  ),
+                                                );
+                                              }),
+                                        )
+                                      : Container(),
+                                      const SizedBox(height: 16),
+                                      TextFormField(
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Theme.of(context)
                                               .colorScheme
                                               .secondary,
+                                          hintText: 'Color',
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              borderSide: BorderSide.none),
                                         ),
-                                        child: GridView.builder(
-                                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 3
-                                            ),
-                                            itemCount: myCategoryIcons.length,
-                                            itemBuilder: (context, int i) {
-                                              return Container(
-                                                height: 50,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                      'assets/${myCategoryIcons[i]}.png'
-                                                    )
-                                                  )
-                                                ),
-                                              );
-                                            }),
-                                      )
-                                    : Container(),
-                                    const SizedBox(height: 16),
-                                    TextFormField(
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        filled: true,
-                                        fillColor: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        hintText: 'Color',
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            borderSide: BorderSide.none),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ));
                           });
                         },
