@@ -15,6 +15,16 @@ class _AddExpenseState extends State<AddExpense> {
   TextEditingController dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
+  List<String> myCategoryIcons = [
+    "entertainment",
+    "food",
+    "home",
+    "pet",
+    "shopping",
+    "tech",
+    "travel",
+  ];
+
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
@@ -122,20 +132,20 @@ class _AddExpenseState extends State<AddExpense> {
                                               .colorScheme
                                               .secondary,
                                           border: OutlineInputBorder(
-                                            borderRadius: isExpanded
-                                            ? const BorderRadius.vertical(
-                                              top: Radius.circular(12)
-                                              )
-                                            : BorderRadius.circular(12),
-                                            borderSide: BorderSide.none
-                                          ),
-                                          suffixIcon:const Icon(
+                                              borderRadius: isExpanded
+                                                  ? const BorderRadius.vertical(
+                                                      top: Radius.circular(12))
+                                                  : BorderRadius.circular(12),
+                                              borderSide: BorderSide.none),
+                                          suffixIcon: const Icon(
                                               FontAwesomeIcons.chevronDown,
                                               size: 16)),
                                     ),
                                     isExpanded
-                                    ? Container(
-                                        width: double.infinity,
+                                    ? AnimatedContainer(
+                                        duration: const Duration(milliseconds: 5000),
+                                        curve: Curves.bounceIn,
+                                        width: MediaQuery.of(context).size.width,
                                         height: 200,
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -146,6 +156,24 @@ class _AddExpenseState extends State<AddExpense> {
                                               .colorScheme
                                               .secondary,
                                         ),
+                                        child: GridView.builder(
+                                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 3
+                                            ),
+                                            itemCount: myCategoryIcons.length,
+                                            itemBuilder: (context, int i) {
+                                              return Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                      'assets/${myCategoryIcons[i]}.png'
+                                                    )
+                                                  )
+                                                ),
+                                              );
+                                            }),
                                       )
                                     : Container(),
                                     const SizedBox(height: 16),
@@ -158,17 +186,14 @@ class _AddExpenseState extends State<AddExpense> {
                                             .secondary,
                                         hintText: 'Color',
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          borderSide: BorderSide.none
-                                        ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            borderSide: BorderSide.none),
                                       ),
                                     ),
                                   ],
-                                )
-                              );
-                            }
-                          );
+                                ));
+                          });
                         },
                       );
                     },
