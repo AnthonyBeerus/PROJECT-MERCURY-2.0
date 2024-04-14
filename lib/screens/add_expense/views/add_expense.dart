@@ -300,14 +300,39 @@ class _AddExpenseState extends State<AddExpense> {
                                               borderSide: BorderSide.none),
                                         ),
                                       ),
+                                      const SizedBox(height: 16,),
+                                      SizedBox(
+                                          width: double.infinity,
+                                          height: kToolbarHeight,
+                                          child: TextButton(
+                                            onPressed: () {},
+                                            style: TextButton.styleFrom(
+                                              backgroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                                side: BorderSide.none,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'save',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall,
+                                            ),
+                                          )),
                                     ],
                                   ),
-                                ));
-                          });
+                                )
+                              );
+                            }
+                          );
                         },
                       );
                     },
-                    icon: Icon(
+                  icon: Icon(
                       FontAwesomeIcons.plus,
                       size: 16,
                       color: Theme.of(context).colorScheme.onBackground,
@@ -351,24 +376,25 @@ class _AddExpenseState extends State<AddExpense> {
                       borderSide: BorderSide.none),
                 ),
               ),
-              const SizedBox(height: 32),
-              SizedBox(
-                  width: double.infinity,
-                  height: kToolbarHeight,
-                  child: TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                        side: BorderSide.none,
-                      ),
-                    ),
-                    child: Text(
-                      'save',
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                  )),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              height: kToolbarHeight,
+              child: TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                    side: BorderSide.none,
+                  ),
+                ),
+                child: Text(
+                    'save',
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                )
+              ),
             ],
           ),
         ),
