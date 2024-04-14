@@ -148,49 +148,78 @@ class _AddExpenseState extends State<AddExpense> {
                                                 size: 16)),
                                       ),
                                       isExpanded
-                                      ? AnimatedContainer(
-                                          duration: const Duration(
-                                              milliseconds: 5000),
-                                          curve: Curves.bounceIn,
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width,
-                                          height: 200,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.vertical(
-                                              bottom: Radius.circular(12),
-                                            ),
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                          ),
-                                          child: GridView.builder(
-                                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 3,
-                                                mainAxisSpacing: 5,
-                                                crossAxisSpacing: 5
+                                          ? AnimatedContainer(
+                                              duration: const Duration(
+                                                  milliseconds: 5000),
+                                              curve: Curves.bounceIn,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 200,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.vertical(
+                                                  bottom: Radius.circular(12),
+                                                ),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                               ),
-                                              itemCount: myCategoryIcons.length,
-                                              itemBuilder:
-                                                  (context, int i) {
-                                                return Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(),
-                                                      borderRadius:
-                                                          BorderRadius
-                                                              .circular(12),
-                                                      image: DecorationImage(
-                                                          image: AssetImage(
-                                                        'assets/${myCategoryIcons[i]}.png',
-                                                      ))),
-                                                );
-                                              }
-                                            ),
-                                        )
-                                      : Container(),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: GridView.builder(
+                                                    gridDelegate:
+                                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 3,
+                                                      mainAxisSpacing: 10,
+                                                      crossAxisSpacing: 10,
+                                                    ),
+                                                    itemCount:
+                                                        myCategoryIcons.length,
+                                                    itemBuilder:
+                                                        (context, int i) {
+                                                      return GestureDetector(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            iconSelected =myCategoryIcons[i];
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          height: 50,
+                                                          width: 50,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                width: 3,
+                                                                color: iconSelected ==
+                                                                        myCategoryIcons[
+                                                                            i]
+                                                                    ? Theme.of(
+                                                                            context)
+                                                                        .colorScheme
+                                                                        .primary
+                                                                    : Theme.of(
+                                                                            context)
+                                                                        .colorScheme
+                                                                        .tertiary),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
+                                                            image:
+                                                                DecorationImage(
+                                                              image: AssetImage(
+                                                                'assets/${myCategoryIcons[i]}.png',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                              ),
+                                            )
+                                          : Container(),
                                       const SizedBox(height: 16),
                                       TextFormField(
                                         decoration: InputDecoration(
