@@ -25,6 +25,8 @@ class _AddExpenseState extends State<AddExpense> {
     "travel",
   ];
 
+  String iconSelected = '';
+
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
@@ -135,8 +137,10 @@ class _AddExpenseState extends State<AddExpense> {
                                                 .secondary,
                                             border: OutlineInputBorder(
                                                 borderRadius: isExpanded
-                                                    ? const BorderRadius.vertical(
-                                                        top: Radius.circular(12))
+                                                    ? const BorderRadius
+                                                        .vertical(
+                                                        top:
+                                                            Radius.circular(12))
                                                     : BorderRadius.circular(12),
                                                 borderSide: BorderSide.none),
                                             suffixIcon: const Icon(
@@ -145,9 +149,12 @@ class _AddExpenseState extends State<AddExpense> {
                                       ),
                                       isExpanded
                                       ? AnimatedContainer(
-                                          duration: const Duration(milliseconds: 5000),
+                                          duration: const Duration(
+                                              milliseconds: 5000),
                                           curve: Curves.bounceIn,
-                                          width: MediaQuery.of(context).size.width,
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width,
                                           height: 200,
                                           decoration: BoxDecoration(
                                             borderRadius:
@@ -165,21 +172,23 @@ class _AddExpenseState extends State<AddExpense> {
                                                 crossAxisSpacing: 5
                                               ),
                                               itemCount: myCategoryIcons.length,
-                                              itemBuilder: (context, int i) {
+                                              itemBuilder:
+                                                  (context, int i) {
                                                 return Container(
                                                   height: 50,
                                                   width: 50,
                                                   decoration: BoxDecoration(
-                                                    border: Border.all(),
-                                                    borderRadius: BorderRadius.circular(12),
-                                                    image: DecorationImage(
-                                                      image: AssetImage(
+                                                      border: Border.all(),
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(12),
+                                                      image: DecorationImage(
+                                                          image: AssetImage(
                                                         'assets/${myCategoryIcons[i]}.png',
-                                                      )
-                                                    )
-                                                  ),
+                                                      ))),
                                                 );
-                                              }),
+                                              }
+                                            ),
                                         )
                                       : Container(),
                                       const SizedBox(height: 16),
