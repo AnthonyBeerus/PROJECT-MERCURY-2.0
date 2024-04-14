@@ -54,8 +54,7 @@ class _AddExpenseState extends State<AddExpense> {
                       ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none)
-                        ),
+                          borderSide: BorderSide.none)),
                 ),
               ),
               const SizedBox(height: 64),
@@ -76,86 +75,97 @@ class _AddExpenseState extends State<AddExpense> {
                       showDialog(
                         context: context,
                         builder: (ctx) {
-                          return AlertDialog(
-                            backgroundColor: Theme.of(context).colorScheme.background,
-                            elevation: 0,
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Add Category',
-                                  style: Theme.of(context).textTheme.displaySmall,
-                                ),
-                                const SizedBox(height: 16),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: 'Category Name',
-                                    isDense: true,
-                                    filled: true,
-                                    fillColor: Theme.of(context).colorScheme.secondary,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      borderSide: BorderSide.none
+                          bool isExpanded = false;
+                          return StatefulBuilder(builder: (context, setState) {
+                            return AlertDialog(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.background,
+                                elevation: 0,
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Add Category',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall,
                                     ),
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                TextFormField(
-                                  
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                    hintText: 'Select Icon',
-                                    isDense: true,
-                                    filled: true,
-                                    fillColor: Theme.of(context)
-                                        .colorScheme
-                                        .secondary,
-                                    
-                                    border: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(12),
-                                      ),
-                                      borderSide: BorderSide.none
-                                    ),
-                                    suffixIcon: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.chevronDown,
-                                        size: 16,
-                                        color: Theme.of(context).colorScheme.onBackground,
+                                    const SizedBox(height: 16),
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        hintText: 'Category Name',
+                                        isDense: true,
+                                        filled: true,
+                                        fillColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            borderSide: BorderSide.none),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.vertical(
-                                      bottom: Radius.circular(12),
+                                    const SizedBox(height: 16),
+                                    //* Select Icon
+                                    TextFormField(
+                                      onTap: () {
+                                        setState(() {
+                                          isExpanded = !isExpanded;
+                                        });
+                                      },
+                                      readOnly: true,
+                                      decoration: InputDecoration(
+                                          hintText: 'Select Icon',
+                                          isDense: true,
+                                          filled: true,
+                                          fillColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          border: const OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                top: Radius.circular(12),
+                                              ),
+                                              borderSide: BorderSide.none),
+                                          suffixIcon:const Icon(
+                                              FontAwesomeIcons.chevronDown,
+                                              size: 16)),
                                     ),
-                                    color: Theme.of(context)
-                                      .colorScheme
-                                      .secondary,
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    filled: true,
-                                    fillColor: Theme.of(context)
-                                        .colorScheme
-                                        .secondary,
-                                    hintText: 'Color',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      borderSide: BorderSide.none
+                                    isExpanded
+                                    ? Container(
+                                        width: double.infinity,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              const BorderRadius.vertical(
+                                            bottom: Radius.circular(12),
+                                          ),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ),
+                                      )
+                                    : Container(),
+                                    const SizedBox(height: 16),
+                                    TextFormField(
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        filled: true,
+                                        fillColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        hintText: 'Color',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          borderSide: BorderSide.none
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ],
-                            )
+                                  ],
+                                )
+                              );
+                            }
                           );
                         },
                       );
@@ -169,9 +179,8 @@ class _AddExpenseState extends State<AddExpense> {
                   ),
                   hintText: 'Category',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none
-                  ),
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none),
                 ),
               ),
               const SizedBox(height: 16),
@@ -201,9 +210,8 @@ class _AddExpenseState extends State<AddExpense> {
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none
-                  ),
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none),
                 ),
               ),
               const SizedBox(height: 32),
@@ -215,9 +223,8 @@ class _AddExpenseState extends State<AddExpense> {
                     style: TextButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          side: BorderSide.none,
-                          
+                        borderRadius: BorderRadius.circular(12.0),
+                        side: BorderSide.none,
                       ),
                     ),
                     child: Text(
