@@ -26,7 +26,7 @@ class _AddExpenseState extends State<AddExpense> {
     "travel",
   ];
 
-  String iconSelected = '';
+
 
   @override
   void initState() {
@@ -89,6 +89,8 @@ class _AddExpenseState extends State<AddExpense> {
                         context: context,
                         builder: (ctx) {
                           bool isExpanded = false;
+                          String iconSelected = '';
+                          Color categoryColor = Theme.of(context).colorScheme.secondary;
                           return StatefulBuilder(builder: (context, setState) {
                             return AlertDialog(
                                 backgroundColor:
@@ -241,12 +243,15 @@ class _AddExpenseState extends State<AddExpense> {
                                                       MainAxisSize.min,
                                                   children: [
                                                     ColorPicker(
-                                                        pickerColor:
-                                                            Theme.of(context)
-                                                                .colorScheme
-                                                                .background,
-                                                        onColorChanged:
-                                                            (value) {}),
+                                                      pickerColor:Theme.of(context)
+                                                        .colorScheme
+                                                        .background,
+                                                      onColorChanged:(value) {
+                                                        setState(() {
+                                                          categoryColor = value;
+                                                        });
+                                                      }
+                                                    ),
                                                     SizedBox(
                                                       width: double.infinity,
                                                       child: TextButton(
@@ -287,9 +292,7 @@ class _AddExpenseState extends State<AddExpense> {
                                         decoration: InputDecoration(
                                           isDense: true,
                                           filled: true,
-                                          fillColor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
+                                          fillColor: categoryColor,
                                           hintText: 'Color',
                                           border: OutlineInputBorder(
                                               borderRadius:
