@@ -10,7 +10,6 @@ class AddExpense extends StatefulWidget {
 }
 
 class _AddExpenseState extends State<AddExpense> {
-
   TextEditingController expenseController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -54,11 +53,14 @@ class _AddExpenseState extends State<AddExpense> {
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30))),
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide.none)
+                        ),
                 ),
               ),
               const SizedBox(height: 64),
               TextFormField(
+                readOnly: true,
                 controller: categoryController,
                 decoration: InputDecoration(
                   filled: true,
@@ -68,9 +70,107 @@ class _AddExpenseState extends State<AddExpense> {
                     size: 16,
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
-                  label: const Text('Category'),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      //* Show a dialog box for creating a new category
+                      showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          return AlertDialog(
+                            backgroundColor: Theme.of(context).colorScheme.background,
+                            elevation: 0,
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Add Category',
+                                  style: Theme.of(context).textTheme.displaySmall,
+                                ),
+                                const SizedBox(height: 16),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Category Name',
+                                    isDense: true,
+                                    filled: true,
+                                    fillColor: Theme.of(context).colorScheme.secondary,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide.none
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                TextFormField(
+                                  
+                                  readOnly: true,
+                                  decoration: InputDecoration(
+                                    hintText: 'Select Icon',
+                                    isDense: true,
+                                    filled: true,
+                                    fillColor: Theme.of(context)
+                                        .colorScheme
+                                        .secondary,
+                                    
+                                    border: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(12),
+                                      ),
+                                      borderSide: BorderSide.none
+                                    ),
+                                    suffixIcon: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        FontAwesomeIcons.chevronDown,
+                                        size: 16,
+                                        color: Theme.of(context).colorScheme.onBackground,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.vertical(
+                                      bottom: Radius.circular(12),
+                                    ),
+                                    color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    filled: true,
+                                    fillColor: Theme.of(context)
+                                        .colorScheme
+                                        .secondary,
+                                    hintText: 'Color',
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide.none
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          );
+                        },
+                      );
+                    },
+                    icon: Icon(
+                      FontAwesomeIcons.plus,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  hintText: 'Category',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none
                   ),
                 ),
               ),
@@ -79,7 +179,7 @@ class _AddExpenseState extends State<AddExpense> {
                 controller: dateController,
                 readOnly: true,
                 onTap: () async {
-                  DateTime? newDate =await showDatePicker(
+                  DateTime? newDate = await showDatePicker(
                     context: context,
                     initialDate: selectedDate,
                     firstDate: DateTime.now(),
@@ -87,7 +187,8 @@ class _AddExpenseState extends State<AddExpense> {
                   );
 
                   if (newDate != null) {
-                    dateController.text = DateFormat('dd/MM/yyyy').format(newDate);
+                    dateController.text =
+                        DateFormat('dd/MM/yyyy').format(newDate);
                     selectedDate = newDate;
                   }
                 },
@@ -99,30 +200,31 @@ class _AddExpenseState extends State<AddExpense> {
                     size: 16,
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
-                  label: const Text('Date'),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none
                   ),
                 ),
               ),
               const SizedBox(height: 32),
               SizedBox(
-                width: double.infinity,
-                height: kToolbarHeight,
-                child: TextButton(
-                  onPressed: () {}, 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0)
-                    )
-                  ),
-                  child: Text(
-                    'save',
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                )
-              ),
+                  width: double.infinity,
+                  height: kToolbarHeight,
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          side: BorderSide.none,
+                          
+                      ),
+                    ),
+                    child: Text(
+                      'save',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  )),
             ],
           ),
         ),
