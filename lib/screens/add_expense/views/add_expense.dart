@@ -26,8 +26,6 @@ class _AddExpenseState extends State<AddExpense> {
     "travel",
   ];
 
-
-
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yyyy').format(DateTime.now());
@@ -82,6 +80,7 @@ class _AddExpenseState extends State<AddExpense> {
                     size: 16,
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
+                  
                   suffixIcon: IconButton(
                     onPressed: () {
                       //* Show a dialog box for creating a new category
@@ -90,7 +89,8 @@ class _AddExpenseState extends State<AddExpense> {
                         builder: (ctx) {
                           bool isExpanded = false;
                           String iconSelected = '';
-                          Color categoryColor = Theme.of(context).colorScheme.secondary;
+                          Color categoryColor =
+                              Theme.of(context).colorScheme.secondary;
                           return StatefulBuilder(builder: (context, setState) {
                             return AlertDialog(
                                 backgroundColor:
@@ -226,65 +226,68 @@ class _AddExpenseState extends State<AddExpense> {
                                             )
                                           : Container(),
                                       const SizedBox(height: 16),
+                                      //* Select Color
+                                      //todo refactor this to a separate widget
                                       TextFormField(
                                         readOnly: true,
                                         onTap: () {
+                                          // setState(() {
+                                          // categoryColor = Theme.of(context)
+                                          //     .colorScheme
+                                          //     .secondary;
+                                          // });
                                           showDialog(
                                             context: context,
                                             builder: (ctx2) {
-                                              return AlertDialog(
-                                                backgroundColor:
-                                                    Theme.of(context)
-                                                        .colorScheme
-                                                        .background,
-                                                elevation: 0,
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    ColorPicker(
-                                                      pickerColor:Theme.of(context)
-                                                        .colorScheme
-                                                        .background,
-                                                      onColorChanged:(value) {
-                                                        setState(() {
-                                                          categoryColor = value;
-                                                        });
-                                                      }
-                                                    ),
-                                                    SizedBox(
-                                                      width: double.infinity,
-                                                      child: TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(ctx2);
-                                                        },
-                                                        style: TextButton
-                                                            .styleFrom(
-                                                          backgroundColor:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .primary,
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12.0),
-                                                            side:
-                                                                BorderSide.none,
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          'save',
-                                                          style:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .labelSmall,
+                                            return AlertDialog(
+                                              backgroundColor: Theme.of(context)
+                                                .colorScheme
+                                                .background,
+                                              elevation: 0,
+                                              content: Column(
+                                                mainAxisSize:MainAxisSize.min,
+                                                children: [
+                                                  ColorPicker(
+                                                    pickerColor: categoryColor,
+                                                    onColorChanged:(value) {
+                                                      setState(() {
+                                                        categoryColor = value;
+                                                      });
+                                                    }
+                                                  ),
+                                                  SizedBox(
+                                                    width: double.infinity,
+                                                    child: TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(ctx2);
+                                                      },
+                                                      style: TextButton
+                                                          .styleFrom(
+                                                        backgroundColor:
+                                                            Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                        shape:
+                                                          RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      12.0),
+                                                          side:BorderSide.none,
+                                                              
                                                         ),
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
+                                                      child: Text(
+                                                        'save',
+                                                        style:
+                                                          Theme.of(context)
+                                                            .textTheme
+                                                            .labelSmall,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                               );
                                             },
                                           );
@@ -300,12 +303,19 @@ class _AddExpenseState extends State<AddExpense> {
                                               borderSide: BorderSide.none),
                                         ),
                                       ),
-                                      const SizedBox(height: 16,),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      //* Save Button
+                                      //todo decouple this to a separate widget
                                       SizedBox(
                                           width: double.infinity,
                                           height: kToolbarHeight,
                                           child: TextButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              //* Create category object and pop
+                                              Navigator.pop(context);
+                                            },
                                             style: TextButton.styleFrom(
                                               backgroundColor: Theme.of(context)
                                                   .colorScheme
@@ -325,14 +335,12 @@ class _AddExpenseState extends State<AddExpense> {
                                           )),
                                     ],
                                   ),
-                                )
-                              );
-                            }
-                          );
+                                ));
+                          });
                         },
                       );
                     },
-                  icon: Icon(
+                    icon: Icon(
                       FontAwesomeIcons.plus,
                       size: 16,
                       color: Theme.of(context).colorScheme.onBackground,
@@ -376,25 +384,24 @@ class _AddExpenseState extends State<AddExpense> {
                       borderSide: BorderSide.none),
                 ),
               ),
-            const SizedBox(height: 32),
-            SizedBox(
-              width: double.infinity,
-              height: kToolbarHeight,
-              child: TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    side: BorderSide.none,
-                  ),
-                ),
-                child: Text(
-                    'save',
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                )
-              ),
+              const SizedBox(height: 32),
+              SizedBox(
+                  width: double.infinity,
+                  height: kToolbarHeight,
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                        side: BorderSide.none,
+                      ),
+                    ),
+                    child: Text(
+                      'save',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  )),
             ],
           ),
         ),
