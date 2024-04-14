@@ -231,11 +231,7 @@ class _AddExpenseState extends State<AddExpense> {
                                       TextFormField(
                                         readOnly: true,
                                         onTap: () {
-                                          // setState(() {
-                                          // categoryColor = Theme.of(context)
-                                          //     .colorScheme
-                                          //     .secondary;
-                                          // });
+                                          
                                           showDialog(
                                             context: context,
                                             builder: (ctx2) {
